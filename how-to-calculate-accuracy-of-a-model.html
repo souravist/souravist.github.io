@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="author" content="Batakrishna Sahu">
+  <meta name="description" content="&#34;How to calculate accuracy of a model&#34; | &#34;So after googling for the past 2 hours you have somehow just fitted (or trained in layman terms) your model...">
+
+  <base href="https://bksahu.github.io">
+
+  <link rel="icon" type="image/png" href="assets/favicon.ico">
+
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/css/bootstrap.min.css" type="text/css" media="all">
+  <link rel="stylesheet" href="https://bksahu.github.io/theme/css/font.css" type="text/css" media="all">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://bksahu.github.io/theme/css/style.css" type="text/css" media="all">
+
+  <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.12.3/jquery.min.js"></script>
+  <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
+  <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/js/bootstrap.min.js"></script>
+  <script type="text/javascript" src="https://bksahu.github.io/theme/js/functions.min.js"></script>
+
+
+
+
+  <link href="https://bksahu.github.io/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="A Technical Journey Blog Full Atom Feed" />
+
+  <title>&#34;How to calculate accuracy of a model&#34;</title>
+
+
+</head>
+
+<body class="home blog">
+  <div>
+    <header class="site-header">
+      <nav class="navbar navbar-default" role="navigation">
+        <div class="container">
+          <div class="row">
+            <div class="site-navigation-inner col-sm-12">
+              <div class="navbar-header">
+                <button type="button" class="btn navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                  <span class="sr-only">Toggle navigation</span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                </button>
+              </div>
+              <div class="collapse navbar-collapse navbar-ex1-collapse">
+              <ul id="menu-all-pages" class="nav navbar-nav">
+                <li class="menu-item"><a href="https://bksahu.github.io/" >Home
+<i class="fa  fa-lg"></i></a></li>
+                <li class="menu-item"><a href="https://drive.google.com/file/d/1nPk-UJUo4OQ5LdnUyd8ERz38rHoKM3wy/view?usp=sharing" >RÉSUMÉ 
+<i class="fa  fa-lg"></i></a></li>
+                <li class="menu-item"><a href="/pages/projects" >projects
+<i class="fa  fa-lg"></i></a></li>
+                <li class="menu-item"><a href="/pages/about-me" >about me
+<i class="fa  fa-lg"></i></a></li>
+              </ul>
+              </div>
+              <div class="social">
+                <a href="https://twitter.com/bksahu_" title="Twitter" >
+<i class="fa fa-twitter fa-lg"></i></a>
+                <a href="https://www.github.com/bksahu" title="Github" >
+<i class="fa fa-github fa-lg"></i></a>
+                <a href="https://www.linkedin.com/in/bksahu/" title="linkedin" >
+<i class="fa fa-linkedin-square fa-lg"></i></a>
+                <a href="mailto:batakrishna.sahu@suiit.ac.in" title="mailto:" >
+<i class="fa fa-envelope fa-lg"></i></a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </nav><!-- .site-navigation -->
+
+      <div class="container">
+      <div id="logo">
+        <span class="site-name"><a class="navbar-brand" href="https://bksahu.github.io"><img width="150" src="assets/QR_Code_.png" class="attachment-full size-full logo_img" alt="logo">          </a>
+        </span><!-- end of .site-name -->
+      </div><!-- end of #logo -->
+        <div class="tagline">
+                <a href="https://bksahu.github.io/tag/conda.html" >conda (1)</a> &#124;
+                <a href="https://bksahu.github.io/tag/deep-learning.html" >deep learning (1)</a> &#124;
+                <a href="https://bksahu.github.io/tag/general.html" >General (1)</a> &#124;
+                <a href="https://bksahu.github.io/tag/machine-learning.html" >machine learning (2)</a> &#124;
+                <a href="https://bksahu.github.io/tag/python.html" >python (2)</a> &#124;
+                <a href="https://bksahu.github.io/tag/ubuntu.html" >Ubuntu (1)</a> &#124;
+        </div>
+    </div>
+
+  </header><!-- #masthead -->
+  </div>
+    <div id="content" class="site-content">
+      <div class="container main-content-area">
+        <div class="row">
+          <div class="main-content-inner col-sm-12 col-md-12">
+            <div id="primary" class="content-area">
+              <div id="main" class="site-main" role="main">
+                <div class="article-container">
+<article>
+  <div class="blog-item-wrap">
+    <div class="post-inner-content">
+      <header class="entry-header page-header">
+        <span class="cat-item"><time datetime="2018-07-06 13:53:35+05:30">Fri 06 July 2018</time></span>
+        <h1 class="entry-title"><a href="https://bksahu.github.io/how-to-calculate-accuracy-of-a-model.html">"How to calculate accuracy of a model"</a></h1>
+      </header><!-- .entry-header -->
+      <div class="fb-like" data-href="https://bksahu.github.io/how-to-calculate-accuracy-of-a-model.html" data-layout="standard" data-action="like" data-show-faces="false" data-share="true"></div>
+      <div class="entry-content">
+        <p><em>"So after googling for the past 2 hours you have somehow just fitted (or trained in layman terms) your model successfully and now you would like to know the accuracy score of your fit. Here are a couple of ways in which you can do that in python"</em></p>
+<p align="center">
+   <img src="assets/images/2018-07-06.jpg">
+  (How I fit my models every day. <b>Source:</b> Twitter/thesmartjokes)
+<p>
+
+<h2> Introduction </h2>
+
+Before jumping right into the implementation let's first see how to calculate accuracy. As per the definition given in the course <i>Udacity - Intro to Machine Learning</i> :
+
+ <i><b>"Accuracy is defined as the number of test points that are classified correctly divided by the total number of test points."</b></i>
+
+<p align="center">
+   <img src="assets/images/2018-07-06-1.png">
+<p>
+
+
+Now that we understand how to calculate accuracy we can create a toy dataset and work on it.
+
+<h2> Implementation in Python </h2>
+
+<div class="codehilite"><pre><code>
+import random
+
+random.seed(18)
+
+# total data point
+n_points = 100
+
+# data points
+X = [(random.random(), random.random()) for ii in range(0,n_points)]
+
+# data labels
+y = [round(random.random()) for ii in range(0,n_points)]
+
+# split into train/test sets
+split = int(0.75*n_points) # Train:Test::0.75:0.25
+X_train = X[0:split] # features_train
+X_test  = X[split:] # features_test
+y_train = y[0:split] # labels_train
+y_test  = y[split:] # labels_test
+
+# import Gaussian Naive Bayes (GaussianNB)
+from sklearn.naive_bayes import GaussianNB
+
+# define classifier
+clf = GaussianNB()
+
+# fit the training data features and it's labels
+clf.fit(X_train, y_train)
+
+
+# predict labels for the test dataset
+pred = clf.predict(X_test)
+</code></pre></div>
+
+
+Above code in Layman terms: 
+<div class="codehilite"><pre><code>
+1. Generate total 100 data points which are nothing but our features (Value between 0 to 1) : X
+2. Now generate their labels wrt to the features, also 100 in numbers. (Value 0 OR 1) : y
+3. Split the data with training percent 75% and testing 25%. : split
+4. 75% of the features (X) for training : X_train
+5. 25% of the features (X) for testing : X_test
+6. 75% of the labels (y) for training : y_train
+7. 25% of the labels (y) for testing : y_test
+8. Use Gaussian Naive Bayes as our classifier
+9. Predict the labels for the features of our testing set : pred
+
+Note: In machine learning, we use 'small y' in contrast with 'capital Y' for the labels.
+</code></pre></div>
+
+
+Now we will use Gaussian Naive Bayes as our classifier.
+Keep in mind that as the length of `features of testing : X_test` is equal with `labels of testing : y_test` so I have taken the liberty to interchange them.
+
+<div class="codehilite"><pre><code>
+len(y_test) == len(X_test)
+>>> True
+</code></pre></div>
+
+Now we will find the accuracy. We can do this in 4 ways.
+
+
+<h3> 1. Without any use of the external library </h3>
+In this approach, we will first count the total number of correctly predicted labels and then divide them by to the total number of labels (or test data points)
+
+
+<div class="codehilite"><pre><code>
+count = len(['matched' for idx, label in enumerate(y_test) if label == pred[idx]])
+print((float(count) / len(y_test)))
+>>> 0.68
+</code></pre></div>
+
+<h3> 2. Using numpy </h3>
+We will use the numpy sum() method to check the total number of correctly predicted labels in contrast to iterating over them.
+
+
+<div class="codehilite"><pre><code>
+import numpy as np
+print(float(np.sum(pred == y_test)/len(y_test)))
+>>> 0.68
+</code></pre></div>
+
+
+<h3> 3. Using sklearn.metrics </h3>
+We will use the `sklearn.metrics.accuracy_score` which is recommended over the previous. ('Cause admit it, you are lazy)
+
+
+<div class="codehilite"><pre><code>
+from sklearn.metrics import accuracy_score
+print(accuracy_score(pred, y_test))
+>>> 0.68
+</code></pre></div>
+
+
+<h3> 4. Using the score method of the classifier </h3>
+Most of the classifiers provide this method. It takes the testing features and it's labels as the parameters.
+
+
+<div class="codehilite"><pre><code>
+print(clf.score(X_test, y_test))
+>>> 0.68
+</code></pre></div>
+
+
+<h2> Conclusion </h2>
+
+So in this article, we learned what is accuracy and how to find it. We also learned how to implement in python.
+<h2> Reference </h2>
+[1] :  <a href="https://twitter.com/thesmartjokes/status/843730749404545024">https://twitter.com/thesmartjokes/status/843730749404545024</a>  <br>
+[2] :  <a href="https://in.udacity.com/course/intro-to-machine-learning--ud120-india">https://in.udacity.com/course/intro-to-machine-learning--ud120-india</a> <br>
+[3] :  <a href="http://scikit-learn.org/stable/modules/classes.html#module-sklearn.naive_bayes">http://scikit-learn.org/stable/modules/classes.html#module-sklearn.naive_bayes</a> <br>
+[4] :  <a href="http://scikit-learn.org/stable/modules/generated/sklearn.metrics.accuracy_score.html">http://scikit-learn.org/stable/modules/generated/sklearn.metrics.accuracy_score.html</a><br>
+[5] :  <a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.sum.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.sum.html</a> <br>
+[6] :  <a href="https://mahata.github.io/machine%20learning/2014/12/31/sklearn-accuracy_score/">https://mahata.github.io/machine%20learning/2014/12/31/sklearn-accuracy_score/</a>
+      </div><!-- .entry-content -->
+      <br /><br />
+      <div class="article_meta">
+        Tags:
+          <a href="https://bksahu.github.io/tag/machine-learning.html">Machine Learning</a>,          <a href="https://bksahu.github.io/tag/python.html">Python</a>      </div>
+    </div>
+  </div>
+</article><!-- #post-## -->
+                </div>
+              </div><!-- #main -->
+          </div><!-- #primary -->
+        </div>
+      </div><!-- close .row -->
+    </div><!-- close .container -->
+  </div><!-- close .site-content -->
+
+
+
+
+  <div id="footer-area">
+    <footer id="colophon" class="site-footer" role="contentinfo">
+      <div class="site-info container">
+        <div class="row">
+                    <div class="copyright col-md-12">
+                    <a href="https://bksahu.github.io/pages/privacy-policy">Privacy Policy</a> |
+                    <a href="https://bksahu.github.io/feeds/all.atom.xml">Atom Feed</a> |
+                    <a href="https://bksahu.github.io/sitemap.xml">Sitemap</a><br />
+                    &copy; 2018-2019 <a href="https://bksahu.github.io">Batakrishna Sahu</a> </div>
+        </div>
+      </div><!-- .site-info -->
+      <div class="scroll-to-top" style="display: none;"><i class="fa fa-angle-up"></i></div><!-- .scroll-to-top -->
+    </footer><!-- #colophon -->
+  </div>
+
+  <script type="text/javascript">
+    window.addEventListener('load', function(){
+    if (window.location.pathname != '/' && window.location.pathname != '/index.html'){
+      window.scroll(0, document.getElementById('main').offsetTop);
+    }})
+  </script>
+
+
+
+
+</body>
+</html>
